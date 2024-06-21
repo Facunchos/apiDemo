@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../service/api.service';
-@Component({
+import { NgFor } from '@angular/common';
+  @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [NgFor],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -17,7 +18,7 @@ export class HomeComponent implements OnInit {
   }
   llenarData(){
     this.apiService.getData().subscribe(data => {
-      this.data = data;
+      this.data = data.results;
       console.log('data', this.data);
     })
   }
