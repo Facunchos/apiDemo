@@ -27,3 +27,10 @@ class LoginForm(FlaskForm):
     password = PasswordField(label='Password:', validators=[DataRequired()])
     submit = SubmitField(label='Sign in')
 
+class PurchaseItemForm(FlaskForm):
+    submit = SubmitField('Purchase Item!')
+    # This is a button that will be used to purchase the item
+
+class SellItemForm(FlaskForm):
+    submit = SubmitField('Sell Item!')
+    
