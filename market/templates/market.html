@@ -36,9 +36,11 @@ content %}
             >
               More Info
             </button>
-            <button class="btn btn-outline btn-success"
+            <button
+              class="btn btn-outline btn-success"
               data-toggle="modal"
-              data-target="#Modal-PurchaseConfirm-{{ item.id }}">
+              data-target="#Modal-PurchaseConfirm-{{ item.id }}"
+            >
               Purchase this Item
             </button>
           </td>
@@ -51,6 +53,29 @@ content %}
     <h2>Owned Items</h2>
     <p>Click on sell item to put it back on the market</p>
     <br />
+    <div class="row">
+      {% for owned_item in owned_items %}
+      <!-- Es el modal que llamamos mas abajo con la informacion del for -->
+      {% include 'includes/owned_items_modals.html' %}
+      <div class="col-md-6">
+        <div style="margin-bottom: 5px" class="card text-center bg-dark">
+          <div class="card-body">
+            <h5 class="card-title">{{owned_item.name}}</h5>
+            <button
+              class="btn btn-outline-danger"
+              style="margin-bottom: 5px"
+              type="button"
+              data-toggle="modal"
+              data-target="#Modal-SellingConfirm-{{ owned_item.id }}"
+            >
+              Sell this Item
+            </button>
+            <p class="card-text"><strong>This item costs {{owned_item.price}}$</strong></p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
   </div>
 </div>
 
