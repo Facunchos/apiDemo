@@ -7,9 +7,11 @@ from market.forms import (
     PurchaseItemForm,
     SellItemForm,
     ItemCreateForm,
+    StatCreateForm,
 )
 from market import db
 from flask_login import login_user, logout_user, login_required, current_user
+
 
 
 @app.route("/")
@@ -124,7 +126,7 @@ def logout_page():
     return redirect(url_for("home_page"))
 
 
-@app.route("/item_create", methods=["GET", "POST"])
+@app.route("/forms/item_create", methods=["GET", "POST"])
 def item_create_page():
     form = ItemCreateForm()
     if form.validate_on_submit():
@@ -147,4 +149,27 @@ def item_create_page():
                 f"There was an error with creating a Item: {err_msg}", category="danger"
             )
 
-    return render_template("item_create.html", form=form)
+    return render_template("/forms/item_create.html", form=form)
+
+
+@app.route("/forms/stat_create", methods=["GET", "POST"])
+def stat_create_page():
+    form = StatCreateForm()
+    if form.validate_on_submit():
+        stat_to_create = Item(
+            name=form.name.data,
+        )
+        db.session.add(stat_to_create)
+        db.session.commit()
+        flash(
+            f"Stat created successfully!",
+            category="success",
+        )
+        return redirect(url_for("market_page"))
+    if form.errors != {}:  # If there are not errors from the validations
+        for err_msg in form.errors.values():
+            flash(
+                f"There was an error with creating the Stat: {err_msg}", category="danger"
+            )
+
+    return render_template("/forms/stat_create.html", form=form)

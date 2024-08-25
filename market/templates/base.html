@@ -41,11 +41,16 @@
           </li>
           <!-- Checks the URL / Path -->
           {% if request.path == url_for('market_page') %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('item_create_page') }}"
-              >Create Item</a
+          {% include 'includes/create.html' %}
+          <button
+              class="btn btn-outline-warning"
+              style="margin-bottom: 5px"
+              type="button"
+              data-toggle="modal"
+              data-target="#Modal-Create"
             >
-          </li>
+              Create
+            </button>
           {% endif %}
         </ul>
         {% if current_user.is_authenticated %}

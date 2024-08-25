@@ -1,8 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
-from market.models import User
-
+from market.models import User, Item, Stat
 
 class RegisterForm(FlaskForm):
     def validate_username(self, username_to_check):
@@ -40,3 +39,22 @@ class ItemCreateForm(FlaskForm):
     barcode = StringField(label='Barcode:', validators=[Length(min=12, max=12), DataRequired()])
     description = StringField(label='Description:', validators=[DataRequired()])
     submit = SubmitField(label='Add Item!')
+    
+    def validate_barcode(self, barcode_to_check):
+        barcode = Item.query.filter_by(barcode=barcode_to_check.data).first()
+        if barcode:
+            raise ValidationError('Barcode already exists! Please try a different barcode')
+        
+    def validate_name(self, name_to_check):
+        name = Item.query.filter_by(name=name_to_check.data).first()
+        if name:
+            raise ValidationError('Item name already exists! Please try a different name')
+       
+class StatCreateForm(FlaskForm):
+    name = StringField(label='Name:', validators=[Length(min=2, max=30), DataRequired()])
+    submit = SubmitField(label='Add Stat!')
+    
+    def validate_name(self, name_to_check):
+        name = Stat.query.filter_by(name=name_to_check.data).first()
+        if name:
+            raise ValidationError('Stat already exists! Please try a different name')

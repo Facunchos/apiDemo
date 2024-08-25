@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}
-Item Create Page
+Stat Create Page
 {% endblock %}
-
 {% block content %}
 <body class="text-center">
     <div class="container">
@@ -10,25 +9,16 @@ Item Create Page
             {{ form.hidden_tag() }}
             <img class="mb-4" src="https://res.cloudinary.com/jimshapedcoding/image/upload/v1597332609/android-icon-192x192_ove2a7.png" alt="">
             <h1 class="h3 mb-3 font-weight-normal">
-                Item Create Page
+                Stat Create Page
             </h1>
             <br>
-            {{ form.name.label() }}
-            {{ form.name(class="form-control", placeholder="Item Name") }}
-
-            {{ form.price.label() }}
-            {{ form.price(class="form-control", placeholder="Price") }}
-
-            {{ form.barcode.label() }}
-            {{ form.barcode(class="form-control", placeholder="Barcode") }}
-
-            {{ form.description.label() }}
-            {{ form.description(class="form-control", placeholder="Description") }}
-
+            {% set field_names = ['name'] %}
+            {% for field_name in field_names %}
+                {{ form[field_name].label() }}
+                {{ form[field_name](class="form-control", placeholder=field_name.capitalize()) }}
+            {% endfor %}
             <br>
-
             {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
-
         </form>
     </div>
 </body>
