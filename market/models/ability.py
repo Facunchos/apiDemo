@@ -5,12 +5,12 @@ from market import db
 class Ability(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(length=50), nullable=False, unique=True)
-    stat_id = db.Column(db.Integer(), db.ForeignKey('stat.id'), nullable=False)
-    level = db.Column(db.Integer(), nullable=False)
-    description = db.Column(db.String(length=1024), nullable=False, unique=True)
-    bonus_t = db.Column(db.Integer(), nullable=False)
-    bonus_k = db.Column(db.Integer(), nullable=False)
-    bonus_sum = db.Column(db.Integer(), nullable=False)
+    stat_id = db.Column(db.Integer(), db.ForeignKey('stat.id'), nullable=False, default=1)
+    level = db.Column(db.Integer(), nullable=False, default=0)
+    description = db.Column(db.String(length=1024), nullable=False, unique=True, default='')
+    bonus_t = db.Column(db.Integer(), nullable=False, default=0)
+    bonus_k = db.Column(db.Integer(), nullable=False, default=0)
+    bonus_sum = db.Column(db.Integer(), nullable=False, default=0)
     expertise = db.Column(db.Boolean(), nullable=False, default=False)
 
     def dice(self, character):
