@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}
-Register Page
+Item Create Page
 {% endblock %}
 
 {% block content %}
@@ -10,20 +10,20 @@ Register Page
             {{ form.hidden_tag() }}
             <img class="mb-4" src="https://res.cloudinary.com/jimshapedcoding/image/upload/v1597332609/android-icon-192x192_ove2a7.png" alt="">
             <h1 class="h3 mb-3 font-weight-normal">
-                Please Create your Account
+                Item Create Page
             </h1>
             <br>
             {{ form.name.label() }}
-            {{ form.username(class="form-control", placeholder="User Name") }}
+            {{ form.name(class="form-control", placeholder="Item Name") }}
 
-            {{ form.email_address.label() }}
-            {{ form.email_address(class="form-control", placeholder="Email Address") }}
+            {{ form.price.label() }}
+            {{ form.price(class="form-control", placeholder="Price") }}
 
-            {{ form.password1.label() }}
-            {{ form.password1(class="form-control", placeholder="Password") }}
+            {{ form.barcode.label() }}
+            {{ form.barcode(class="form-control", placeholder="Barcode") }}
 
-            {{ form.password2.label() }}
-            {{ form.password2(class="form-control", placeholder="Confirm Password") }}
+            {{ form.description.label() }}
+            {{ form.description(class="form-control", placeholder="Description") }}
 
             <br>
 

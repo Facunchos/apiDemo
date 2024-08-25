@@ -1,7 +1,13 @@
 from market import app
 from flask import render_template, redirect, url_for, flash, request
 from market.models import Item, User
-from market.forms import RegisterForm, LoginForm, PurchaseItemForm, SellItemForm
+from market.forms import (
+    RegisterForm,
+    LoginForm,
+    PurchaseItemForm,
+    SellItemForm,
+    ItemCreateForm,
+)
 from market import db
 from flask_login import login_user, logout_user, login_required, current_user
 
@@ -47,7 +53,6 @@ def market_page():
                     category="danger",
                 )
         return redirect(url_for("market_page"))
-
 
     if request.method == "GET":
         items = Item.query.filter_by(owner=None)
@@ -117,3 +122,29 @@ def logout_page():
     logout_user()
     flash("Logged out", category="info")
     return redirect(url_for("home_page"))
+
+
+@app.route("/item_create", methods=["GET", "POST"])
+def item_create_page():
+    form = ItemCreateForm()
+    if form.validate_on_submit():
+        item_to_create = Item(
+            name=form.name.data,
+            price=form.price.data,
+            barcode=form.barcode.data,
+            description=form.description.data,
+        )
+        db.session.add(item_to_create)
+        db.session.commit()
+        flash(
+            f"Item created successfully!",
+            category="success",
+        )
+        return redirect(url_for("market_page"))
+    if form.errors != {}:  # If there are not errors from the validations
+        for err_msg in form.errors.values():
+            flash(
+                f"There was an error with creating a Item: {err_msg}", category="danger"
+            )
+
+    return render_template("item_create.html", form=form)

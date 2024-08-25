@@ -33,4 +33,10 @@ class PurchaseItemForm(FlaskForm):
 
 class SellItemForm(FlaskForm):
     submit = SubmitField('Sell Item!')
-    
+
+class ItemCreateForm(FlaskForm):
+    name = StringField(label='Name:', validators=[Length(min=2, max=30), DataRequired()])
+    price = StringField(label='Price:', validators=[DataRequired()])
+    barcode = StringField(label='Barcode:', validators=[Length(min=12, max=12), DataRequired()])
+    description = StringField(label='Description:', validators=[DataRequired()])
+    submit = SubmitField(label='Add Item!')
