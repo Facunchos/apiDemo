@@ -5,21 +5,21 @@ from market.functions import create, base_page
 
 
 @app.route("/")
-@app.route("/home")
+@app.route("/pages/home")
 def home_page():
     return render_template("home.html")
 
-@app.route("/market", methods=["GET", "POST"])
+@app.route("/pages/market", methods=["GET", "POST"])
 @login_required
 def market_page():
     return base_page.market_page()
 
-@app.route("/register", methods=["GET", "POST"])
+@app.route("/pages/register", methods=["GET", "POST"])
 def register_page():
     return base_page.register_page()
 
 
-@app.route("/login", methods=["GET", "POST"])
+@app.route("/pages/login", methods=["GET", "POST"])
 def login_page():
     return base_page.login_page()
 
@@ -36,3 +36,7 @@ def item_create_page():
 @app.route("/forms/stat_create", methods=["GET", "POST"])
 def stat_create_page():
     return create.stat_create_page()
+
+@app.route("/pages/stat", methods=["GET"])
+def stat_page():
+    return base_page.stat_page()

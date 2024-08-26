@@ -51,7 +51,7 @@ def market_page():
         items = Item.query.filter_by(owner=None)
         owned_items = Item.query.filter_by(owner=current_user.id)
         return render_template(
-            "market.html",
+            "/pages/market.html",
             items=items,
             purchase_form=purchase_form,
             owned_items=owned_items,
@@ -81,7 +81,7 @@ def register_page():
                 f"There was an error with creating a user: {err_msg}", category="danger"
             )
 
-    return render_template("register.html", form=form)
+    return render_template("pages/register.html", form=form)
 
 
 def login_page():
@@ -104,7 +104,7 @@ def login_page():
                 category="danger",
             )
 
-    return render_template("login.html", form=form)
+    return render_template("pages/login.html", form=form)
 
 
 def logout_page():
@@ -112,3 +112,10 @@ def logout_page():
     logout_user()
     flash("Logged out", category="info")
     return redirect(url_for("home_page"))
+
+def stat_page():
+    stats = Stat.query.all()
+    return render_template(
+        "pages/stat.html",
+        stats=stats,
+    )

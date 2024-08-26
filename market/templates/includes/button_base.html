@@ -4,7 +4,7 @@
   }
 </style>
 
-<!-- More Info -->
+<!-- Create  -->
 <div
   class="modal fade"
   id="Modal-Create"
@@ -37,6 +37,54 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('stat_create_page') }}"
+          >Stat</a
+          >
+        </li>
+      </ul>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- View  -->
+<div
+  class="modal fade"
+  id="Modal-View"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel">
+          <!-- Titulo -->
+          View!
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <ul>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('market_page') }}"
+          >Market</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('stat_page') }}"
           >Stat</a
           >
         </li>
